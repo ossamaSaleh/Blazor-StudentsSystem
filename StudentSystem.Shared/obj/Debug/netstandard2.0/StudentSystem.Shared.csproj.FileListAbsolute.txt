@@ -1,0 +1,9 @@
+C:\Users\SalmanTariq\source\repos\StudentSystem.Shared\bin\Debug\netstandard2.0\StudentSystemServer.Shared.deps.json
+C:\Users\SalmanTariq\source\repos\StudentSystem.Shared\bin\Debug\netstandard2.0\StudentSystemServer.Shared.dll
+C:\Users\SalmanTariq\source\repos\StudentSystem.Shared\bin\Debug\netstandard2.0\StudentSystemServer.Shared.pdb
+C:\Users\SalmanTariq\source\repos\StudentSystem.Shared\obj\Debug\netstandard2.0\StudentSystem.Shared.csprojAssemblyReference.cache
+C:\Users\SalmanTariq\source\repos\StudentSystem.Shared\obj\Debug\netstandard2.0\StudentSystem.Shared.AssemblyInfoInputs.cache
+C:\Users\SalmanTariq\source\repos\StudentSystem.Shared\obj\Debug\netstandard2.0\StudentSystem.Shared.AssemblyInfo.cs
+C:\Users\SalmanTariq\source\repos\StudentSystem.Shared\obj\Debug\netstandard2.0\StudentSystem.Shared.csproj.CoreCompileInputs.cache
+C:\Users\SalmanTariq\source\repos\StudentSystem.Shared\obj\Debug\netstandard2.0\StudentSystemServer.Shared.dll
+C:\Users\SalmanTariq\source\repos\StudentSystem.Shared\obj\Debug\netstandard2.0\StudentSystemServer.Shared.pdb
