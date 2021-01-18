@@ -1,4 +1,4 @@
-﻿@page "/fetchdata"
+@page "/fetchdata"
 @using StudentSystemServer.Shared;
 @inject HttpClient Http
 
@@ -18,7 +18,7 @@ else
                 <th>FullName</th>
                 <th>Mobile</th>
                 <th>Parent Mobile</th>
-               
+
             </tr>
         </thead>
         <tbody>
@@ -28,18 +28,90 @@ else
                     <td>@student.FullName</td>
                     <td>@student.Mobile</td>
                     <td>@student.ParentMobile1</td>
-                    
+
                 </tr>
             }
         </tbody>
     </table>
+    <p><button class="btn btn-primary" @onclick="AddNew">Add New</button></p>
+    @if (ShowPopup)
+    {
+        <div class="modal" tabindex="-1" style="display:block"
+             role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Edit Forecast</h3>
+                        <!-- Button to close the popup -->
+                        <button type="button" class="close"
+                                @onclick="ClosePopup">
+                            <span aria-hidden="true">X</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input class="form-control" type="text"
+                               placeholder="First Name"
+                               @bind="item.FirstName" />
+                        <input class="form-control" type="text"
+                               placeholder="Last Name"
+                               @bind="item.LastName" />
+                        <input class="form-control" type="date"
+                               placeholder="Birthdate" min="1970-01-01"
+                               @bind="item.Birthdate" />
+                        <input class="form-control" type="text"
+                               placeholder="Mobile"
+                               @bind="item.Mobile" />
+                        <input class="form-control" type="text"
+                               placeholder="Parent Mobile1"
+                               @bind="item.ParentMobile1" />
+                        <br />
+                        <!-- Button to save the forecast -->
+                        <button class="btn btn-primary"
+                                @onclick="SaveStudent">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
 }
 
 @code {
     private List<StudentProfileDTO> students;
+    bool ShowPopup = false;
+    StudentProfileDTO item = new StudentProfileDTO();
     protected override async Task OnInitializedAsync()
     {
-        //Change the localhost:<port> when go to production: 200Ok
-        students = await  Http.GetFromJsonAsync<List<StudentProfileDTO>>("https://localhost:44350/api/Students/GetAll");
+        //Change the localhost:<port> when go to production
+        students = await Http.GetFromJsonAsync<List<StudentProfileDTO>>("https://localhost:44345/api/Students/GetAll");
     }
+    void ClosePopup()
+    {
+        ShowPopup = false;
+    }
+    void AddNew()
+    {
+        item = new StudentProfileDTO();
+        item.Id = 0;
+        ShowPopup = true;
+    }
+    async Task SaveStudent()
+    {
+        ShowPopup = false;
+        var newItem = new StudentProfileDTO();
+        newItem.Birthdate = item.Birthdate;
+        newItem.FirstName = item.FirstName;
+        newItem.Gender = true;
+        newItem.LastName = item.LastName;
+        newItem.Mobile = item.Mobile;
+        newItem.ParentMobile1 = item.ParentMobile1;
+        newItem.ParentMobile2 = item.ParentMobile2;
+        await Http.PostAsJsonAsync(
+"https://localhost:44345/api/Students/Create",
+newItem);
+        students = await Http.GetFromJsonAsync <List<StudentProfileDTO>> ("https://localhost:44345/api/Students/GetAll");
+    }
+
 }
